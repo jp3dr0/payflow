@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-//import 'package:flutter_masked_text2/flutter_masked_text2.dart';
-//import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_masked_text2/flutter_masked_text2.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:payflow/modules/insert_boleto/insert_boleto_controller.dart';
 import 'package:payflow/shared/themes/app_colors.dart';
 import 'package:payflow/shared/themes/app_text_styles.dart';
-//import 'package:payflow/shared/widgets/input_text/input_text_widget.dart';
-//import 'package:payflow/shared/widgets/set_buttons/set_label_buttons.dart';
+import 'package:payflow/shared/widgets/input_text/input_text_widget.dart';
+import 'package:payflow/shared/widgets/set_label_buttons/set_label_buttons.dart';
 
 class InsertBoletoPage extends StatefulWidget {
   final String? barcode;
@@ -22,14 +22,16 @@ class InsertBoletoPage extends StatefulWidget {
 class _InsertBoletoPageState extends State<InsertBoletoPage> {
   final controller = InsertBoletoController();
 
-  //final moneyInputTextController = MoneyMaskedTextController(leftSymbol: "R\$", initialValue: 0, decimalSeparator: ",");
-  //final vencimentoInputTextController = MaskedTextController(mask: "00/00/0000");
-  //final codigoInputTextController = TextEditingController();
+  final moneyInputTextController = MoneyMaskedTextController(
+      leftSymbol: "R\$", initialValue: 0, decimalSeparator: ",");
+  final vencimentoInputTextController =
+      MaskedTextController(mask: "00/00/0000");
+  final codigoInputTextController = TextEditingController();
 
   @override
   void initState() {
     if (widget.barcode != null) {
-      //codigoInputTextController.text = widget.barcode!;
+      codigoInputTextController.text = widget.barcode!;
     }
     super.initState();
   }
@@ -39,14 +41,13 @@ class _InsertBoletoPageState extends State<InsertBoletoPage> {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: Text("Insert Boleto Page"),
+        //title: Text("Insert Boleto Page"),
         elevation: 0,
         backgroundColor: AppColors.background,
         leading: BackButton(
-          color: AppColors.body,
+          color: AppColors.input,
         ),
       ),
-      /* 
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -120,19 +121,18 @@ class _InsertBoletoPageState extends State<InsertBoletoPage> {
           ),
           SetLabelButtons(
             enableSecondaryColor: true,
-            labelPrimary: "Cancelar",
-            onTapPrimary: () {
+            primaryLabel: "Cancelar",
+            primaryOnPressed: () {
               Navigator.pop(context);
             },
-            labelSecondary: "Cadastrar",
-            onTapSecondary: () async {
-              await controller.cadastrar();
+            secondaryLabel: "Cadastrar",
+            secondaryOnPressed: () async {
+              await controller.cadastrarBoleto();
               Navigator.pop(context);
             },
           ),
         ],
       ),
-      */
     );
   }
 }
