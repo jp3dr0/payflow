@@ -70,7 +70,7 @@ class _HomePageState extends State<HomePage> {
                 icon: Icon(Icons.home, color: AppColors.primary)),
             GestureDetector(
               onTap: () {
-                print("clicou");
+                Navigator.pushNamed(context, "/barcode_scanner");
               },
               child: Container(
                   width: 56,
